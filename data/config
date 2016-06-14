@@ -1,0 +1,26 @@
+# UTM Zone
+utm_zone = 10
+
+# Model directory
+model_dir = i05
+
+# Number of cells in x, y, and z.
+nx = 1024
+ny = 896
+nz = 100
+
+# Depth, in meters
+depth = 50000
+depth_interval = 500
+
+# Corners, in UTM projection.
+top_left_corner_e		= 504472.106530
+top_left_corner_n   	= 4050290.088321  
+bottom_left_corner_e  	= 779032.901477
+bottom_left_corner_n  	= 3699450.983449
+top_right_corner_e	  	= 905367.666914 
+top_right_corner_n		= 4366503.431060
+bottom_right_corner_e 	= 1181157.928029
+bottom_right_corner_n	= 4014713.414724
+
+Coaling1983A
