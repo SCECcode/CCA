@@ -137,15 +137,15 @@ int cca_query(cca_point_t *points, cca_properties_t *data, int numpoints) {
 		point_utm_n = sin_rotation_angle * temp_utm_e + cos_rotation_angle * temp_utm_n;
 
 		// Which point base point does that correspond to?
-		load_x_coord = floor(point_utm_e / total_width_m * configuration->nx);
-		load_y_coord = floor(point_utm_n / total_height_m * configuration->ny);
+		load_x_coord = floor(point_utm_e / total_width_m * (configuration->nx - 1));
+		load_y_coord = floor(point_utm_n / total_height_m * (configuration->ny - 1));
 
 		// And on the Z-axis?
 		load_z_coord = (configuration->depth / configuration->depth_interval - 1) -
 					   floor(points[i].depth / configuration->depth_interval);
 
 		// Are we outside the model's X and Y boundaries?
-		if (load_x_coord > configuration->nx - 1 || load_y_coord > configuration->ny - 1 || load_x_coord < 0 || load_y_coord < 0) {
+		if (load_x_coord > configuration->nx - 2 || load_y_coord > configuration->ny - 2 || load_x_coord < 0 || load_y_coord < 0) {
 			data[i].vp = -1;
 			data[i].vs = -1;
 			data[i].rho = -1;
