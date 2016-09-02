@@ -2,7 +2,7 @@
 utm_zone = 10
 
 # Model directory
-model_dir = i05
+model_dir = i06
 
 # Number of cells in x, y, and z.
 nx = 1024
