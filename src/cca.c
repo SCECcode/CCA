@@ -336,10 +336,8 @@ int cca_finalize() {
 	pj_free(cca_latlon);
 	pj_free(cca_utm);
 
-	if (velocity_model->vs) free(velocity_model->vs);
-	if (velocity_model->vp) free(velocity_model->vp);
-
-	free(configuration);
+        if (velocity_model) free(velocity_model);
+	if (configuration) free(configuration);
 
 	return SUCCESS;
 }
