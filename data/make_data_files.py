@@ -26,7 +26,7 @@ def main():
     # Set our variable defaults.
     iteration = -1
     username = ""
-    path = "/var/www/html/research/ucvmc/CCA/" + model + "_ASCII"
+    path = "/home/scec-01/enjuilee/work/" + model + "_ASCII"
 
     # Get the iteration number.
     try:
@@ -50,7 +50,7 @@ def main():
     print("\nDownloading model file\n")
 
     subprocess.check_call(["scp", username +
-                           "hypocenter.usc.edu:" + path + "/" + model + iteration.zfill(2) + ".ascii",
+                           "intensity.usc.edu:" + path + "/" + model + iteration.zfill(2) + ".ascii",
                            "."])
 
     # Now we need to go through the data files and put them in the correct

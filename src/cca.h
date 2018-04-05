@@ -89,6 +89,18 @@ typedef struct cca_configuration_t {
 	double bottom_right_corner_n;
 	/** Z interval for the data */
 	double depth_interval;
+        /** Brocher 2005 scaling polynomial coefficient 10^0 */
+        double p0;
+        /** Brocher 2005 scaling polynomial coefficient 10^1 */
+        double p1;
+        /** Brocher 2005 scaling polynomial coefficient 10^2 */
+        double p2;
+        /** Brocher 2005 scaling polynomial coefficient 10^3 */
+        double p3;
+        /** Brocher 2005 scaling polynomial coefficient 10^4 */
+        double p4;
+        /** Brocher 2005 scaling polynomial coefficient 10^5 */
+        double p5;
 } cca_configuration_t;
 
 /** The configuration structure for the Vs30 map. */
@@ -166,21 +178,21 @@ const char *version_string = "CCA";
 
 // Variables
 /** Set to 1 when the model is ready for query. */
-int is_initialized = 0;
+int cca_is_initialized = 0;
 
 /** Location of the ucvm.e e-tree file. */
 char vs30_etree_file[128];
 /** Location of En-Jui's latest iteration files. */
-char iteration_directory[128];
+char cca_iteration_directory[128];
 
 /** Configuration parameters. */
-cca_configuration_t *configuration;
+cca_configuration_t *cca_configuration;
 
 /** Holds the configuration parameters for the Vs30 map. */
-cca_vs30_map_config_t *vs30_map;
+cca_vs30_map_config_t *cca_vs30_map;
 
 /** Holds pointers to the velocity model data OR indicates it can be read from file. */
-cca_model_t *velocity_model;
+cca_model_t *cca_velocity_model;
 
 /** Proj.4 latitude longitude, WGS84 projection holder. */
 projPJ cca_latlon;
@@ -216,6 +228,11 @@ int model_finalize();
 int model_version(char *ver, int len);
 /** Queries the model */
 int model_query(cca_point_t *points, cca_properties_t *data, int numpts);
+
+int (*get_model_init())(const char *, const char *);
+int (*get_model_query())(cca_point_t *, cca_properties_t *, int);
+int (*get_model_finalize())();
+int (*get_model_version())(char *, int);
 
 #endif
 

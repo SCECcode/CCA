@@ -16,6 +16,15 @@ nz = 100
 depth = 50000
 depth_interval = 500
 
+# Density scaling parameters
+p5 = -0.0024189659303912917
+p4 = 0.015600987888334450
+p3 = 0.051962399479341816
+p2 = -0.51231936640441489
+p1 = 1.2550758337054457
+p0 = 1.2948318548300342
+
+
 # Corners, in UTM projection.
 top_left_corner_e	= 503240.523120
 top_left_corner_n   	= 4051863.829470 
