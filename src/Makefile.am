@@ -31,3 +31,8 @@ cca_static.o: cca.c
 	
 utm_geo.o: utm_geo.f90
 	$(FC) -fPIC -o $@ -c $^ $(AM_FCFLAGS)
+
+clean:
+	rm -rf $(TARGETS)
+	rm -rf cca.o utm_geo.o
+
