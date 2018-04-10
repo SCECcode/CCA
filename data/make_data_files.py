@@ -18,7 +18,8 @@ dimension_z = 100
 
 def usage():
     print("\n./make_data_files.py -i [iteration number]\n\n")
-    print("-i - The iteration number to retrieve from intensity.\n\n")
+    print("-i - The iteration number to retrieve from hypocenter.\n\n")
+    print("-u - username to use to do the dataset retrieval.\n\n")
     sys.exit(0)
 
 def main():
@@ -26,7 +27,7 @@ def main():
     # Set our variable defaults.
     iteration = -1
     username = ""
-    path = "/home/scec-01/enjuilee/work/" + model + "_ASCII"
+    path = "/var/www/html/research/ucvmc/" + model 
 
     # Get the iteration number.
     try:
@@ -50,7 +51,7 @@ def main():
     print("\nDownloading model file\n")
 
     subprocess.check_call(["scp", username +
-                           "intensity.usc.edu:" + path + "/" + model + iteration.zfill(2) + ".ascii",
+                           "hypocenter.usc.edu:" + path + "/" + model + iteration.zfill(2) + ".ascii",
                            "."])
 
     # Now we need to go through the data files and put them in the correct
