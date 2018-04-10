@@ -17,9 +17,9 @@ dimension_y = 896
 dimension_z = 100
 
 def usage():
-    print("\n./make_data_files.py -i [iteration number]\n\n")
-    print("-i - The iteration number to retrieve from hypocenter.\n\n")
-    print("-u - username to use to do the dataset retrieval.\n\n")
+    print("\n./make_data_files.py -i [6] -u [uid]\n\n")
+    print("-i - The iteration number to retrieve from hypocenter.\n")
+    print("-u - username to use to do the dataset retrieval.\n")
     sys.exit(0)
 
 def main():
