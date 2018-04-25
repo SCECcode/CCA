@@ -172,8 +172,14 @@ int cca_query(cca_point_t *points, cca_properties_t *data, int numpoints) {
 		}
 
 		// Get the X, Y, and Z percentages for the bilinear or trilinear interpolation below.
-		x_percent = fmod(point_utm_e, total_width_m / cca_configuration->nx) / (total_width_m / cca_configuration->nx);
-		y_percent = fmod(point_utm_n, total_height_m / cca_configuration->ny) / (total_height_m / cca_configuration->ny);
+	        double x_interval=(cca_configuration->nx > 1) ?
+                     total_width_m / (cca_configuration->nx-1):total_width_m;
+                double y_interval=(cca_configuration->ny > 1) ?
+                     total_height_m / (cca_configuration->ny-1):total_height_m;
+
+
+		x_percent = fmod(point_utm_e, x_interval) / (x_interval);
+		y_percent = fmod(point_utm_n, y_interval) / (y_interval);
 		z_percent = fmod(points[i].depth, cca_configuration->depth_interval) / cca_configuration->depth_interval;
 
 		if (load_z_coord < 1) {
