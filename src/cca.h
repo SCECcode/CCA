@@ -165,23 +165,23 @@ typedef struct cca_model_t {
 } cca_model_t;
 
 /** Contains the Vs30 and surface values from the UCVM map. */
-typedef struct vs30_mpayload_t {
+typedef struct cca_vs30_mpayload_t {
         /** Surface height in meters */
         float surf;
         /** Vs30 data from Wills and Wald */
         float vs30;
-} vs30_mpayload_t;
+} cca_vs30_mpayload_t;
 
 // Constants
 /** The version of the model. */
-const char *version_string = "CCA";
+const char *cca_version_string = "CCA";
 
 // Variables
 /** Set to 1 when the model is ready for query. */
 int cca_is_initialized = 0;
 
 /** Location of the ucvm.e e-tree file. */
-char vs30_etree_file[128];
+char cca_vs30_etree_file[128];
 /** Location of En-Jui's latest iteration files. */
 char cca_iteration_directory[128];
 
@@ -202,19 +202,19 @@ projPJ cca_utm;
 projPJ cca_aeqd;
 
 /** The cosine of the rotation angle used to rotate the box and point around the bottom-left corner. */
-double cos_rotation_angle = 0;
+double cca_cos_rotation_angle = 0;
 /** The sine of the rotation angle used to rotate the box and point around the bottom-left corner. */
-double sin_rotation_angle = 0;
+double cca_sin_rotation_angle = 0;
 
 /** The height of this model's region, in meters. */
-double total_height_m = 0;
+double cca_total_height_m = 0;
 /** The width of this model's region, in meters. */
-double total_width_m = 0;
+double cca_total_width_m = 0;
 
 /** The cosine of the Vs30 map's rotation. */
-double cos_vs30_rotation_angle = 0;
+double cca_cos_vs30_rotation_angle = 0;
 /** The sine of the Vs30 map's rotation. */
-double sin_vs30_rotation_angle = 0;
+double cca_sin_vs30_rotation_angle = 0;
 
 // UCVM API Required Functions
 
@@ -251,27 +251,27 @@ int cca_query(cca_point_t *points, cca_properties_t *data, int numpts);
 /** Reads the configuration file. */
 int read_configuration(char *file, cca_configuration_t *config);
 /** Prints out the error string. */
-void print_error(char *err);
+void cca_print_error(char *err);
 /** Retrieves the value at a specified grid point in the model. */
-void read_properties(int x, int y, int z, cca_properties_t *data);
+void cca_read_properties(int x, int y, int z, cca_properties_t *data);
 /** Attempts to malloc the model size in memory and read it in. */
-int try_reading_model(cca_model_t *model);
+int cca_try_reading_model(cca_model_t *model);
 /** Calculates density from Vs. */
-double calculate_density(double vs);
+double cca_calculate_density(double vs);
 
 // GTL related
 /** Retrieves the vs30 value for a given point. */
-int get_vs30_based_gtl(cca_point_t *point, cca_properties_t *data);
+int cca_get_vs30_based_gtl(cca_point_t *point, cca_properties_t *data);
 /** Reads the specified Vs30 map from UCVM. */
-int read_vs30_map(char *filename, cca_vs30_map_config_t *map);
+int cca_read_vs30_map(char *filename, cca_vs30_map_config_t *map);
 /** Gets the Vs30 value at a point */
-double get_vs30_value(double longitude, double latitude, cca_vs30_map_config_t *map);
+double cca_get_vs30_value(double longitude, double latitude, cca_vs30_map_config_t *map);
 
 // Interpolation Functions
 /** Linearly interpolates two cca_properties_t structures */
-void linear_interpolation(double percent, cca_properties_t *x0, cca_properties_t *x1, cca_properties_t *ret_properties);
+void cca_linear_interpolation(double percent, cca_properties_t *x0, cca_properties_t *x1, cca_properties_t *ret_properties);
 /** Bilinearly interpolates the properties. */
-void bilinear_interpolation(double x_percent, double y_percent, cca_properties_t *four_points, cca_properties_t *ret_properties);
+void cca_bilinear_interpolation(double x_percent, double y_percent, cca_properties_t *four_points, cca_properties_t *ret_properties);
 /** Trilinearly interpolates the properties. */
-void trilinear_interpolation(double x_percent, double y_percent, double z_percent, cca_properties_t *eight_points,
+void cca_trilinear_interpolation(double x_percent, double y_percent, double z_percent, cca_properties_t *eight_points,
 							 cca_properties_t *ret_properties);
