@@ -39,14 +39,14 @@ int cca_init(const char *dir, const char *label) {
         sprintf(cca_vs30_etree_file, "%s/model/ucvm/ucvm.e", dir);
 
 	// Read the cca_configuration file.
-	if (read_cca_configuration(configbuf, cca_configuration) != SUCCESS)
+	if (cca_read_configuration(configbuf, cca_configuration) != SUCCESS)
 		return FAIL;
 
 	// Set up the iteration directory.
 	sprintf(cca_iteration_directory, "%s/model/%s/data/%s/", dir, label, cca_configuration->model_dir);
 
 	// Can we allocate the model, or parts of it, to memory. If so, we do.
-	tempVal = try_reading_model(cca_velocity_model);
+	tempVal = cca_try_reading_model(cca_velocity_model);
 
 	if (tempVal == SUCCESS) {
 		fprintf(stderr, "WARNING: Could not load model into memory. Reading the model from the\n");
@@ -384,7 +384,7 @@ int cca_version(char *ver, int len)
  * @param config The cca_configuration struct to which the data should be written.
  * @return Success or failure, depending on if file was read successfully.
  */
-int read_cca_configuration(char *file, cca_configuration_t *config) {
+int cca_read_configuration(char *file, cca_configuration_t *config) {
 	FILE *fp = fopen(file, "r");
 	char key[40];
 	char value[80];

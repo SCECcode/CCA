@@ -249,7 +249,7 @@ int cca_query(cca_point_t *points, cca_properties_t *data, int numpts);
 
 // Non-UCVM Helper Functions
 /** Reads the configuration file. */
-int read_configuration(char *file, cca_configuration_t *config);
+int cca_read_configuration(char *file, cca_configuration_t *config);
 /** Prints out the error string. */
 void cca_print_error(char *err);
 /** Retrieves the value at a specified grid point in the model. */
