@@ -302,7 +302,7 @@ void cca_trilinear_interpolation(double x_percent, double y_percent, double z_pe
 	cca_bilinear_interpolation(x_percent, y_percent, four_points, &temp_array[1]);
 
 	// Now linearly interpolate between the two.
-	linear_interpolation(z_percent, &temp_array[0], &temp_array[1], ret_properties);
+	cca_linear_interpolation(z_percent, &temp_array[0], &temp_array[1], ret_properties);
 
 	free(temp_array);
 }
