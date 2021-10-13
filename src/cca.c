@@ -427,6 +427,7 @@ int cca_read_configuration(char *file, cca_configuration_t *config) {
                                 if (strcmp(value, "on") == 0) config->gtl = 1;
                                 else config->gtl = 0;
                         }
+// anything else, just ignore
 		}
 	}
 
