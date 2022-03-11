@@ -9,3 +9,4 @@ install:
 	mkdir -p ${prefix}/data
 	cp ./config ${prefix}/data
 	cp -R ./i* ${prefix}/data
+	chmod +x ${prefix}/data/i06

@@ -1,7 +1,7 @@
 # UTM Zone
 utm_zone = 10
 
-# Model directory
+# Model directory, for 6 iterations
 model_dir = i06
 model_data_path  = https://g-c662a6.a78b8.36fe.data.globus.org/ucvm/models
 
