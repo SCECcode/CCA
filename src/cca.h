@@ -30,6 +30,9 @@
 /** Defines a return value of failure */
 #define FAIL 1
 
+/* config string */
+#define CCA_CONFIG_MAX 1000
+
 // Structures
 /** Defines a point (latitude, longitude, and depth) in WGS84 format */
 typedef struct cca_point_t {

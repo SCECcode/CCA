@@ -13,6 +13,10 @@
 
 #include "cca.h"
 
+/** The config of the model */
+char *cca_config_string=NULL;
+int cca_config_sz=0;
+
 /**
  * Initializes the CCA plugin model within the UCVM framework. In order to initialize
  * the model, we must provide the UCVM install path and optionally a place in memory
@@ -31,6 +35,10 @@ int cca_init(const char *dir, const char *label) {
 	cca_configuration = calloc(1, sizeof(cca_configuration_t));
 	cca_velocity_model = calloc(1, sizeof(cca_model_t));
         cca_vs30_map = calloc(1, sizeof(cca_vs30_map_config_t));
+
+        cca_config_string = calloc(CCA_CONFIG_MAX, sizeof(char));
+        cca_config_string[0]='\0';
+        cca_config_sz=0;
 
 	// Configuration file location.
 	sprintf(configbuf, "%s/model/%s/data/config", dir, label);
@@ -98,6 +106,10 @@ int cca_init(const char *dir, const char *label) {
         // Get the cos and sin for the Vs30 map rotation.
         cca_cos_vs30_rotation_angle = cos(cca_vs30_map->rotation * DEG_TO_RAD);
         cca_sin_vs30_rotation_angle = sin(cca_vs30_map->rotation * DEG_TO_RAD);
+
+        /* setup config_string */
+        sprintf(cca_config_string,"config = %s\n",configbuf);
+        cca_config_sz=1;
 
 	// Let everyone know that we are initialized and ready for business.
 	cca_is_initialized = 1;
@@ -374,6 +386,25 @@ int cca_version(char *ver, int len)
   strncpy(ver, cca_version_string, verlen);
   return 0;
 }
+
+/**
+ * Returns the model config information.
+ *
+ * @param key Config key string to return.
+ * @param sz number of config terms.
+ * @return Zero
+ */
+int cca_config(char **config, int *sz)
+{
+  int len=strlen(cca_config_string);
+  if(len > 0) {
+    *config=cca_config_string;
+    *sz=cca_config_sz;
+    return UCVM_CODE_SUCCESS;
+  }
+  return UCVM_CODE_ERROR;
+}
+
 
 /**
  * Reads the cca_configuration file describing the various properties of CVM-S5 and populates
@@ -820,7 +851,18 @@ int model_finalize() {
  * @return Zero
  */
 int model_version(char *ver, int len) {
-	return cca_version(ver, len);
+        return cca_version(ver, len);
+}
+
+/**
+ * Version function loaded and called by the UCVM library. Calls cca_config.
+ *
+ * @param config Config string to return.
+ * @param sz number of config terms
+ * @return Zero
+ */
+int model_config(char **config, int *sz) {
+	return cca_config(config, sz);
 }
 
 int (*get_model_init())(const char *, const char *) {
@@ -834,6 +876,9 @@ int (*get_model_finalize())() {
 }
 int (*get_model_version())(char *, int) {
          return &cca_version;
+}
+int (*get_model_config())(char **, int*) {
+         return &cca_config;
 }
 
 #endif
