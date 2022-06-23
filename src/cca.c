@@ -400,9 +400,9 @@ int cca_config(char **config, int *sz)
   if(len > 0) {
     *config=cca_config_string;
     *sz=cca_config_sz;
-    return success;
+    return SUCCESS;
   }
-  return error;
+  return FAIL;
 }
 
 
