@@ -17,13 +17,14 @@
 #include <math.h>
 
 #include "etree.h"
-#include "proj_api.h"
+#include "proj.h"
 
 // Constants
 #ifndef M_PI
 	/** Defines pi */
 	#define M_PI 3.14159265358979323846
 #endif
+#define DEG_TO_RAD M_PI / 180.0;
 
 /** Defines a return value of success */
 #define SUCCESS 0
@@ -197,12 +198,9 @@ cca_vs30_map_config_t *cca_vs30_map;
 /** Holds pointers to the velocity model data OR indicates it can be read from file. */
 cca_model_t *cca_velocity_model;
 
-/** Proj.4 latitude longitude, WGS84 projection holder. */
-projPJ cca_latlon;
-/** Proj.4 UTM projection holder. */
-projPJ cca_utm;
-/** Proj.4 Vs30 map projection holder. */
-projPJ cca_aeqd;
+/** Proj coordinate transformation objects. */
+PJ *cca_geo2utm = NULL;
+PJ *cca_geo2aeqd = NULL;
 
 /** The cosine of the rotation angle used to rotate the box and point around the bottom-left corner. */
 double cca_cos_rotation_angle = 0;
