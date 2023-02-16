@@ -17,10 +17,10 @@ install:
 	cp libcca.a ${prefix}/lib
 	cp cca.h ${prefix}/include
 
-libcca.a: cca_static.o utm_geo.o
+libcca.a: cca_static.o 
 	$(AR) rcs $@ $^
 
-libcca.so: cca.o utm_geo.o
+libcca.so: cca.o 
 	$(FC) -shared $(AM_FCFLAGS) -o libcca.so $^ $(AM_LDFLAGS)
 
 cca.o: cca.c
@@ -29,9 +29,6 @@ cca.o: cca.c
 cca_static.o: cca.c
 	$(CC) -o $@ -c $^ $(AM_CFLAGS)
 	
-utm_geo.o: utm_geo.f90
-	$(FC) -fPIC -o $@ -c $^ $(AM_FCFLAGS)
-
 clean:
 	rm -rf $(TARGETS)
 	rm -rf cca.o utm_geo.o

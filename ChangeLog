@@ -1,5 +1,12 @@
-CCA Alpha (March 2015):
-	Includes the central California inversions from En-Jui Lee's full 3D 
-	tomographic improvements. This model does not include a GTL. Further
-	information regarding this model can be found at:
-	http://scec.usc.edu/scecpedia/CCA
+## 2023-02-15 Mei-Hui Su <mei@usc.edu>
+* Brad Aagaard modification to upgrade to PROJ and eliminate the
+  the need for utm_geo.f90 code
+
+## 201X-01-00 David Gill - SCEC 
+* Convert to a plugin-module for UCVM
+
+## 2015-03-00 CCA Alpha 
+* Includes the central California inversions from En-Jui Lee's full 3D 
+  tomographic improvements. This model does not include a GTL. Further
+  information regarding this model can be found at:
+  http://scec.usc.edu/scecpedia/CCA
