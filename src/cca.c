@@ -12,7 +12,9 @@
  *
  */
 
+#include "ucvm_model_dtypes.h"
 #include "cca.h"
+#include <assert.h>
 
 /** The config of the model */
 char *cca_config_string=NULL;
@@ -28,6 +30,7 @@ int cca_config_sz=0;
  * @return Success or failure, if initialization was successful.
  */
 int cca_init(const char *dir, const char *label) {
+    char cca_projstr[64];
     int tempVal = 0;
     char configbuf[512];
     double north_height_m = 0, east_width_m = 0, rotation_angle = 0;
@@ -80,15 +83,15 @@ int cca_init(const char *dir, const char *label) {
     snprintf(cca_projstr, 64, "+proj=utm +zone=%d +datum=NAD27 +units=m +no_defs", cca_configuration->utm_zone);
     if (!(cca_geo2utm = proj_create_crs_to_crs(PJ_DEFAULT_CTX, "EPSG:4326", cca_projstr, NULL))) {
         cca_print_error("Could not set up Proj transformation from EPSG:4325 to UTM.");
-        cca_print_error(proj_context_errno_string(PJ_DEFAULT_CTX, proj_context_errno(PJ_DEFAULT_CTX)));
-        return (CCA_CODE_ERROR);
+        cca_print_error((char  *)proj_context_errno_string(PJ_DEFAULT_CTX, proj_context_errno(PJ_DEFAULT_CTX)));
+        return (UCVM_CODE_ERROR);
     }
 
     assert(cca_vs30_map);
     if (!(cca_geo2aeqd = proj_create_crs_to_crs(PJ_DEFAULT_CTX, "EPSG:4326", cca_vs30_map->projection, NULL))) {
         cca_print_error("Could not set up Proj transformation from EPSG:4326 to AEQD projection.");
-        cca_print_error(proj_context_errno_string(PJ_DEFAULT_CTX, proj_context_errno(PJ_DEFAULT_CTX)));
-        return (CCA_CODE_ERROR);
+        cca_print_error((char  *)proj_context_errno_string(PJ_DEFAULT_CTX, proj_context_errno(PJ_DEFAULT_CTX)));
+        return (UCVM_CODE_ERROR);
     }
 
     // In order to simplify our calculations in the query, we want to rotate the box so that the bottom-left
@@ -161,12 +164,12 @@ int cca_query(cca_point_t *points, cca_properties_t *data, int numpoints) {
 
         PJ_COORD xyzSrc = proj_coord(points[i].latitude, points[i].longitude, 0.0, HUGE_VAL);
         PJ_COORD xyzDest = proj_trans(cca_geo2utm, PJ_FWD, xyzSrc);
-        err = proj_context_errno(PJ_DEFAULT_CTX);
+        int err = proj_context_errno(PJ_DEFAULT_CTX);
         if (err) {
             fprintf(stderr, "Error occurred while transforming latitude=%.4f, longitude=%.4f to UTM.\n",
                     points[i].latitude, points[i].longitude);
             fprintf(stderr, "Proj error: %s\n", proj_context_errno_string(PJ_DEFAULT_CTX, err));
-            return CCA_CODE_ERROR;
+            return UCVM_CODE_ERROR;
         }
         point_u = xyzDest.xyzt.x;
         point_v = xyzDest.xyzt.y;
@@ -787,7 +790,7 @@ double cca_get_vs30_value(double longitude, double latitude, cca_vs30_map_config
     if (addr.y >= map->y_ticks) addr.y = map->y_ticks - edgetics;
     etree_search(map->vs30_map, addr, NULL, "*", &(vs30_payload[3]));
 
-    percent = fmod(rotated_point_e / map->spacing, map->spacing) / map->spacing;
+    percent = fmod(rotated_point_x / map->spacing, map->spacing) / map->spacing;
     vs30_payload[0].vs30 = percent * vs30_payload[0].vs30 + (1 - percent) * vs30_payload[1].vs30;
     vs30_payload[1].vs30 = percent * vs30_payload[2].vs30 + (1 - percent) * vs30_payload[3].vs30;
 
