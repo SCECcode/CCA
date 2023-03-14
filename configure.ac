@@ -27,6 +27,7 @@ AC_ARG_WITH([etree-libdir],
   [AS_HELP_STRING([--with-etree-libdir], [directory containing Etree library])],
   [with_etree_libdir="$withval"],
   [with_etree_libdir=no])
+AC_SUBST(with_etree_libdir)
 
 dnl SQLITE
 AC_ARG_ENABLE([sqlite],
@@ -112,12 +113,10 @@ fi
 dnl
 dnl Setup environment so dependencies are used in build
 dnl
+
 CFLAGS="$CFLAGS"
 CPPFLAGS="-I$prefix/include $CPPFLAGS"
 LDFLAGS="-L$prefix/lib -L$prefix/lib64 $LDFLAGS"
-AC_SUBST(CFLAGS)
-AC_SUBST(CPPFLAGS)
-AC_SUBST(LDFLAGS)
 
 dnl
 dnl Verify configuration
@@ -128,15 +127,16 @@ if test "$install_etree" = yes ; then
   ETREE_INCLUDES=""
   ETREE_LDFLAGS="-letree"
 else
-  if test "$with_etree_incdir" != no ; then
-    ETREE_INCLUDES="-I$with_etree_incdir"
-  fi
-  if test "$with_etree_libdir" != no ; then
-    ETREE_LDFLAGS="-L$with_etree_libdir -letree"
-  fi
   SCEC_ETREE_HEADER
   SCEC_ETREE_LIB
 fi
+if test "$with_etree_incdir" != no ; then
+  ETREE_INCLUDES="-I$with_etree_incdir"
+fi
+if test "$with_etree_libdir" != no ; then
+  ETREE_LDFLAGS="-L$with_etree_libdir -letree"
+fi
+
 AC_SUBST(ETREE_INCLUDES)
 AC_SUBST(ETREE_LDFLAGS)
 
@@ -179,18 +179,24 @@ if test "$install_proj" = yes ; then
   PROJ_INCLUDES="-I$prefix/include"
   PROJ_LDFLAGS="-L$prefix/lib"
 else
-  if test "$with_proj_incdir" != no ; then
-    PROJ_INCLUDES="-I$with_proj_incdir"
-  fi
-  if test"$with_proj_libdir" != no ; then
-    PROJ_LDFLAGS="-L$with_proj_libdir -lproj"
-  fi
   SCEC_PROJ_HEADER
   SCEC_PROJ_LIB
+fi
+if test "$with_proj_incdir" != no ; then
+  PROJ_INCLUDES="-I$with_proj_incdir"
+fi
+if test "$with_proj_libdir" != no ; then
+  PROJ_LDFLAGS="-L$with_proj_libdir -lproj"
 fi
 AC_SUBST(PROJ_INCLUDES)
 AC_SUBST(PROJ_LDFLAGS)
 
+
+
+
+AC_SUBST(CFLAGS)
+AC_SUBST(CPPFLAGS)
+AC_SUBST(LDFLAGS)
 
 AC_CONFIG_FILES([
   Makefile
