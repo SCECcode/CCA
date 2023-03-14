@@ -16,7 +16,7 @@ As part of [UCVM](https://github.com/SCECcode/ucvm) installation, use 'cca' as t
 ## Support
 Support for CCA is provided by the Southern California Earthquake Center
 (SCEC) Research Computing Group.  Users can report issues and feature requests 
-using CVMHLABN's github-based issue tracking link below. Developers will also 
+using CCA's github-based issue tracking link below. Developers will also 
 respond to emails sent to the SCEC software contact listed below.
 1. [CCA Github Issue Tracker](https://github.com/SCECcode/CCA/issues)
 2. Email Contact: software@scec.usc.edu
