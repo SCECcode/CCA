@@ -74,7 +74,7 @@ int cca_init(const char *dir, const char *label) {
     }
 
 //reference ????
-    char* pstr= "+proj=utm +zone=11 +ellps=clrk66 +datum=NAD27 +units=m +no_defs";
+    char* pstr= "+proj=utm +zone=10 +ellps=clrk66 +datum=NAD27 +units=m +no_defs";
 
     // We need to convert the point from lat, lon to UTM, let's set it up.
     /* Setup projection */
