@@ -87,6 +87,19 @@ AC_ARG_WITH([proj-libdir],
 	[with_proj_libdir=no])
 AC_SUBST(with_proj_libdir)
 
+
+##check optional large data path 
+##CCA_LARGETDATA_DIR=$CVM_LARGETDATA_DIR/model/cvmh
+if test x"$CVM_LARGEDATA_DIR" != x; then
+   # test directory existence
+   CCA_LARGEDATA_DIR=$CVM_LARGEDATA_DIR/model/cca
+   AC_CHECK_FILE($CVM_LARGEDATA_DIR/model/cca/density.dat, [], [AC_MSG_ERROR(["CCA data not found in cvm_largedata_dir"])])
+   AM_CONDITIONAL([WITH_CCA_LARGEDATA_DIR], true)
+   AC_SUBST(CCA_LARGEDATA_DIR)
+else
+   AM_CONDITIONAL(WITH_CCA_LARGEDATA_DIR, false)
+fi
+
 dnl
 dnl Command line tools
 dnl
@@ -95,6 +108,8 @@ AC_PROG_CC
 AC_PROG_LIBTOOL
 AC_PROG_INSTALL
 AC_PROG_MKDIR_P
+AC_PROG_RANLIB
+AC_PROG_LN_S
 
 dnl CURL (used to download model files)
 AC_PATH_PROG(CURL, curl)
