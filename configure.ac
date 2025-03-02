@@ -89,7 +89,6 @@ AC_SUBST(with_proj_libdir)
 
 
 ##check optional large data path 
-##CCA_LARGETDATA_DIR=$CVM_LARGETDATA_DIR/model/cvmh
 if test x"$CVM_LARGEDATA_DIR" != x; then
    # test directory existence
    CCA_LARGEDATA_DIR=$CVM_LARGEDATA_DIR/model/cca_i06
