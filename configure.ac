@@ -92,7 +92,7 @@ AC_SUBST(with_proj_libdir)
 if test x"$CVM_LARGEDATA_DIR" != x; then
    # test directory existence
    CCA_LARGEDATA_DIR=$CVM_LARGEDATA_DIR/model/cca_i06
-   AC_CHECK_FILE($CVM_LARGEDATA_DIR/model/cca_i06/density.dat, [], [AC_MSG_ERROR(["CCA data not found in cvm_largedata_dir"])])
+#   AC_CHECK_FILE($CVM_LARGEDATA_DIR/model/cca_i06/density.dat, [], [AC_MSG_ERROR(["CCA data not found in cvm_largedata_dir"])])
    AM_CONDITIONAL([WITH_CCA_LARGEDATA_DIR], true)
    AC_SUBST(CCA_LARGEDATA_DIR)
 else
