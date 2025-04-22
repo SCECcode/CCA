@@ -1,22 +1,22 @@
 # Autoconf/automake file
 
-#bin_PROGRAMS = test_cvms5
+bin_PROGRAMS = test_cca
 
 # General compiler/linker flags
-#AM_CFLAGS = ${CFLAGS}
-#AM_LDFLAGS = ${LDFLAGS}
+AM_CFLAGS = ${CFLAGS}
+AM_LDFLAGS = ${LDFLAGS}
 
-#objects = test.o
-#TARGETS = $(bin_PROGRAMS)
+objects = test_api.o
+TARGETS = $(bin_PROGRAMS)
 
-#all: $(bin_PROGRAMS)
+all: $(bin_PROGRAMS)
 
-#install:
-#	mkdir -p ${prefix}/tests
-#	cp test_cvms5 ${prefix}/tests
+install:
+	mkdir -p ${prefix}/tests
+	cp test_cca ${prefix}/tests
 
-#test_cvms5: $(objects)
-#	$(CC) -o $@ $^ $(AM_CFLAGS) -L../src -lcvms5 $(AM_LDFLAGS)
+test_cca: $(objects)
+	$(CC) -o $@ $^ $(AM_CFLAGS) -L../src -lcca $(AM_LDFLAGS)
 
-#$(objects): %.o: %.c
-#	$(CC) -o $@ -c $^ $(AM_CFLAGS) -I../src/ $(AM_CFLAGS)
+$(objects): %.o: %.c
+	$(CC) -o $@ -c $^ $(AM_CFLAGS) -I../src/ $(AM_CFLAGS)
