@@ -5,30 +5,33 @@
 
 ## Description
 
-CCA
+#CCA
 
-## Usage
+CCA-06 model is a 3D velocity model for Central California.  CCA-06 was 
+produced through tomographic inversion, using the USGS Bay Area (v8.3.0),
+CVM-S4.26, and Lin-Thurber models as starting models. 6 iterations were 
+performed on a 500m-resolution mesh, down to a minimum Vs of 900 m/s,
+to generate the final model.  This model includes an optional Ely-Jordan GTL.
 
-### UCVM
+## Installation
 
-As part of [UCVM](https://github.com/SCECcode/ucvm) installation, use 'cca' as the model.
+This package is intended to be installed as part of the UCVM framework,
+version 25.x or higher.
 
-## Support
-Support for CCA is provided by the Southern California Earthquake Center
-(SCEC) Research Computing Group.  Users can report issues and feature requests 
-using CCA's github-based issue tracking link below. Developers will also 
-respond to emails sent to the SCEC software contact listed below.
-1. [CCA Github Issue Tracker](https://github.com/SCECcode/CCA/issues)
-2. Email Contact: software@scec.usc.edu
+## Library
 
-## Contributing
-We welcome contributions to the CCA, please contact us at software@scec.usc.edu.
+The library ./lib/libcca.a may be statically linked into any
+user application. Also, if your system supports dynamic linking,
+you will also have a ./lib/libcca.so file that can be used
+for dynamic linking. The header file defining the API is located
+in ./include/cca.h.
 
-## Credits
-* En-Jui Lee 
+## Contact the authors
 
-
-## License
-This software is distributed under the BSD 3-Clause open-source license.
-Please see the [LICENSE.txt](LICENSE.txt) file for more information.
+If you would like to contact the authors regarding this software,
+please e-mail software@scec.org. Note this e-mail address should
+be used for questions regarding the software itself (e.g. how
+do I link the library properly?). Questions regarding the model's
+science (e.g. on what paper is the CCA based?) should be directed
+to the model's authors, located in the AUTHORS file.
 
