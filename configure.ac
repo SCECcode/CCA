@@ -222,6 +222,7 @@ AC_CONFIG_FILES([
   src/Makefile
   dependencies/Makefile
   data/Makefile
+  test/Makefile
   ])
 
 AC_OUTPUT
