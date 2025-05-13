@@ -1,7 +1,6 @@
 # CCA-06
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-
 ![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/cca)
 [![cca-ucvm-ci Actions Status](https://github.com/SCECcode/cca/workflows/cca-ucvm-ci/badge.svg)](https://github.com/SCECcode/cca/actions)
 

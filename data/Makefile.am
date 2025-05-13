@@ -9,7 +9,9 @@ all:
 if WITH_CCA_LARGEDATA_DIR
 	echo "USING WITH_CCA_LARGEDATA_DIR in cca"
 else
-	./make_data_files.py
+	if [ ! -d "${prefix}/data/i06" ]; then \
+		./make_data_files.py; \
+	fi
 endif
 
 install:

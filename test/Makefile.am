@@ -3,8 +3,8 @@
 bin_PROGRAMS = test_cca
 
 # General compiler/linker flags
-AM_CFLAGS = ${CFLAGS}
-AM_LDFLAGS = ${LDFLAGS}
+AM_CFLAGS = ${CFLAGS} -I../src
+AM_LDFLAGS = ${LDFLAGS} -L../src -lcca
 
 objects = test_api.o
 TARGETS = $(bin_PROGRAMS)
@@ -16,7 +16,14 @@ install:
 	cp test_cca ${prefix}/tests
 
 test_cca: $(objects)
-	$(CC) -o $@ $^ $(AM_CFLAGS) -L../src -lcca $(AM_LDFLAGS)
+	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
 $(objects): %.o: %.c
-	$(CC) -o $@ -c $^ $(AM_CFLAGS) -I../src/ $(AM_CFLAGS)
+	$(CC) -o $@ -c $^ $(AM_CFLAGS)
+
+run_unit : test_cca
+	./test_cca
+
+clean :
+	rm -rf *~ *.o test_cca
+
