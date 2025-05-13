@@ -3,8 +3,8 @@
 bin_PROGRAMS = test_cca
 
 # General compiler/linker flags
-AM_CFLAGS = ${CFLAGS} -I../src
-AM_LDFLAGS = ${LDFLAGS} -L../src -lcca
+AM_CFLAGS = ${CFLAGS} ${ETREE_INCLUDES} ${PROJ_INCLUDES} -I../src
+AM_LDFLAGS = ${LDFLAGS} ${ETREE_LDFLAGS} ${PROJ_LDFLAGS} -L../src -lcca
 
 objects = test_api.o
 TARGETS = $(bin_PROGRAMS)
@@ -15,7 +15,7 @@ install:
 	mkdir -p ${prefix}/tests
 	cp test_cca ${prefix}/tests
 
-test_cca: $(objects)
+test_cca$(EXEEXT): $(objects)
 	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
 $(objects): %.o: %.c
