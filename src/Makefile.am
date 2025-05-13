@@ -1,9 +1,9 @@
 # Autoconf/automake file
 
 # General compiler/linker flags
-AM_CFLAGS = ${CFLAGS}
-AM_FCFLAGS = ${FCFLAGS}
-AM_LDFLAGS = ${LDFLAGS}
+AM_CFLAGS = ${CFLAGS} ${ETREE_INCLUDES} ${PROJ_INCLUDES}
+AM_LDFLAGS = ${LDFLAGS} ${ETREE_LDFLAGS} ${PROJ_LDFLAGS}
+
 
 TARGETS = libcca.a libcca.so
 
@@ -17,11 +17,11 @@ install:
 	cp libcca.a ${prefix}/lib
 	cp cca.h ${prefix}/include
 
-libcca.a: cca_static.o utm_geo.o
+libcca.a: cca_static.o 
 	$(AR) rcs $@ $^
 
-libcca.so: cca.o utm_geo.o
-	$(FC) -shared $(AM_FCFLAGS) -o libcca.so $^ $(AM_LDFLAGS)
+libcca.so: cca.o 
+	$(CC) -shared $(AM_CCFLAGS) -o libcca.so $^ $(AM_LDFLAGS)
 
 cca.o: cca.c
 	$(CC) -fPIC -DDYNAMIC_LIBRARY -o $@ -c $^ $(AM_CFLAGS)
@@ -29,10 +29,7 @@ cca.o: cca.c
 cca_static.o: cca.c
 	$(CC) -o $@ -c $^ $(AM_CFLAGS)
 	
-utm_geo.o: utm_geo.f90
-	$(FC) -fPIC -o $@ -c $^ $(AM_FCFLAGS)
-
 clean:
 	rm -rf $(TARGETS)
-	rm -rf cca.o utm_geo.o
+	rm -rf cca.o 
 
