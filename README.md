@@ -12,7 +12,7 @@ of 900 m/s, to generate the final model.  This model includes an optional Ely-J
 ## Installation
 
 This package is intended to be installed as part of the UCVM framework,
-version 25.x or higher. 
+version 25.7 or higher. 
 
 ## Contact the authors
 
