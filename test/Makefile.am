@@ -4,7 +4,7 @@ bin_PROGRAMS = test_cca
 
 # General compiler/linker flags
 AM_CFLAGS = ${CFLAGS} ${ETREE_INCLUDES} ${PROJ_INCLUDES} -I../src
-AM_LDFLAGS = ${LDFLAGS} ${ETREE_LDFLAGS} ${PROJ_LDFLAGS} -L../src -lcca
+AM_LDFLAGS = ${LDFLAGS} ${ETREE_LDFLAGS} ${PROJ_LDFLAGS} -L../src -lcca -lm
 
 objects = test_api.o
 TARGETS = $(bin_PROGRAMS)
