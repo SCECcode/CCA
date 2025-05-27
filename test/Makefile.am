@@ -22,7 +22,7 @@ $(objects): %.o: %.c
 	$(CC) -o $@ -c $^ $(AM_CFLAGS)
 
 run_unit : test_cca
-	./test_cca
+	./run_unit
 
 clean :
 	rm -rf *~ *.o test_cca

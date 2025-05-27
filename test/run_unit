@@ -2,7 +2,7 @@
 
 if [[ -z "${UCVM_INSTALL_PATH}" ]]; then
   if [[ -f "${UCVM_INSTALL_PATH}/model/cca/lib" ]]; then
-    env DYLD_LIBRARY_PATH=${UCVM_INSTALL_PATH}/model/cca/lib ./test_cca
+    env DYLD_LIBRARY_PATH=${UCVM_INSTALL_PATH}/model/cca/lib:${DYLD_LIBRARY_PATH} ./test_cca
     exit
   fi
 fi
