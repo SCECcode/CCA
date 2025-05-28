@@ -2,7 +2,7 @@ name: cca-ucvm-ci
 
 on:
   push:
-    branches: [ main ]
+    branches: [ foofoo ]
 
 jobs:
   cca-build-ucvm-linux:
